@@ -1,0 +1,399 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Roy.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Roy.Core.AuthHelper.IJwtFactory">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Roy.Core.AuthHelper.IJwtFactory.GenerateEncodeTokenAsync(System.String,System.String,System.Security.Claims.ClaimsIdentity)">
+            <summary>
+            
+            </summary>
+            <param name="userName"></param>
+            <param name="refreshToken"></param>
+            <param name="identity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Roy.Core.AuthHelper.IJwtFactory.GenerateClaimsIdentity(Roy.Core.AuthHelper.OverWrite.JWTTokenModel)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Roy.Core.AuthHelper.JwtFactory">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Roy.Core.AuthHelper.JwtFactory.#ctor(Microsoft.Extensions.Options.IOptions{Roy.Core.AuthHelper.JWT.SecurityDemo.Authentication.JWT.AuthHelper.JwtIssuerOptions})">
+            <summary>
+            
+            </summary>
+            <param name="jwtOptions"></param>
+        </member>
+        <member name="M:Roy.Core.AuthHelper.JwtFactory.GenerateClaimsIdentity(Roy.Core.AuthHelper.OverWrite.JWTTokenModel)">
+            <summary>
+            
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Roy.Core.AuthHelper.JwtFactory.GenerateEncodeTokenAsync(System.String,System.String,System.Security.Claims.ClaimsIdentity)">
+            <summary>
+            
+            </summary>
+            <param name="userName"></param>
+            <param name="refreshToken"></param>
+            <param name="identity"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Roy.Core.AuthHelper.JWT.SecurityDemo.Authentication.JWT.AuthHelper.JwtIssuerOptions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Roy.Core.AuthHelper.JWT.SecurityDemo.Authentication.JWT.AuthHelper.JwtIssuerOptions.Issuer">
+            <summary>
+            4.1.1.  "iss" (Issuer) Claim - The "iss" (issuer) claim identifies the principal that issued the JWT.
+            </summary>
+        </member>
+        <member name="P:Roy.Core.AuthHelper.JWT.SecurityDemo.Authentication.JWT.AuthHelper.JwtIssuerOptions.Subject">
+            <summary>
+            4.1.2.  "sub" (Subject) Claim - The "sub" (subject) claim identifies the principal that is the subject of the JWT.
+            </summary>
+        </member>
+        <member name="P:Roy.Core.AuthHelper.JWT.SecurityDemo.Authentication.JWT.AuthHelper.JwtIssuerOptions.Audience">
+            <summary>
+            4.1.3.  "aud" (Audience) Claim - The "aud" (audience) claim identifies the recipients that the JWT is intended for.
+            </summary>
+        </member>
+        <member name="P:Roy.Core.AuthHelper.JWT.SecurityDemo.Authentication.JWT.AuthHelper.JwtIssuerOptions.Expiration">
+            <summary>
+            4.1.4.  "exp" (Expiration Time) Claim - The "exp" (expiration time) claim identifies the expiration time on or after which the JWT MUST NOT be accepted for processing.
+            </summary>
+        </member>
+        <member name="P:Roy.Core.AuthHelper.JWT.SecurityDemo.Authentication.JWT.AuthHelper.JwtIssuerOptions.NotBefore">
+            <summary>
+            4.1.5.  "nbf" (Not Before) Claim - The "nbf" (not before) claim identifies the time before which the JWT MUST NOT be accepted for processing.
+            </summary>
+        </member>
+        <member name="P:Roy.Core.AuthHelper.JWT.SecurityDemo.Authentication.JWT.AuthHelper.JwtIssuerOptions.IssuedAt">
+            <summary>
+            4.1.6.  "iat" (Issued At) Claim - The "iat" (issued at) claim identifies the time at which the JWT was issued.
+            </summary>
+        </member>
+        <member name="P:Roy.Core.AuthHelper.JWT.SecurityDemo.Authentication.JWT.AuthHelper.JwtIssuerOptions.ValidFor">
+            <summary>
+            Set the timespan the token will be valid for (default is 10 min)
+            </summary>
+        </member>
+        <member name="P:Roy.Core.AuthHelper.JWT.SecurityDemo.Authentication.JWT.AuthHelper.JwtIssuerOptions.JtiGenerator">
+            <summary>
+            "jti" (JWT ID) Claim (default ID is a GUID)
+            </summary>
+        </member>
+        <member name="P:Roy.Core.AuthHelper.JWT.SecurityDemo.Authentication.JWT.AuthHelper.JwtIssuerOptions.SigningCredentials">
+            <summary>
+            The signing key to use when generating tokens.
+            </summary>
+        </member>
+        <member name="T:Roy.Core.AuthHelper.JWT.PermissionHander">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Roy.Core.AuthHelper.JWT.PermissionHander.#ctor(Roy.Core.IServices.IModuleService)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Roy.Core.AuthHelper.JWT.PermissionHander.HandleRequirementAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Roy.Core.AuthHelper.JWT.PermissionRequirement)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+            <param name="requirement"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Roy.Core.AuthHelper.JWT.PermissionRequirement">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Roy.Core.AuthHelper.JWT.RefreshTokenOptions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Roy.Core.AuthHelper.JWT.RefreshTokenOptions.UserName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Roy.Core.AuthHelper.JWT.RefreshTokenOptions.RefreshToken">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Roy.Core.AuthHelper.OverWrite.JwtHelper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Roy.Core.AuthHelper.OverWrite.JwtHelper.secretKey">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Roy.Core.AuthHelper.OverWrite.JwtHelper.IssueJWT(Roy.Core.AuthHelper.OverWrite.JWTTokenModel)">
+            <summary>
+            颁发JWT字符串
+            </summary>
+            <param name="tokenModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Roy.Core.AuthHelper.OverWrite.JwtHelper.SerializeJWT(System.String)">
+            <summary>
+            解析
+            </summary>
+            <param name="jwtStr"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Roy.Core.AuthHelper.OverWrite.JWTTokenModel">
+            <summary>
+            令牌
+            </summary>
+        </member>
+        <member name="P:Roy.Core.AuthHelper.OverWrite.JWTTokenModel.UserId">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:Roy.Core.AuthHelper.OverWrite.JWTTokenModel.UserName">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:Roy.Core.AuthHelper.OverWrite.JWTTokenModel.Role">
+            <summary>
+            角色
+            </summary>
+        </member>
+        <member name="P:Roy.Core.AuthHelper.OverWrite.JWTTokenModel.Work">
+            <summary>
+            职能
+            </summary>
+        </member>
+        <member name="T:Roy.Core.AuthHelper.OverWrite.JwtTokenAuth">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Roy.Core.AuthHelper.OverWrite.JwtTokenAuth._next">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Roy.Core.AuthHelper.OverWrite.JwtTokenAuth.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            
+            </summary>
+            <param name="next"></param>
+        </member>
+        <member name="M:Roy.Core.AuthHelper.OverWrite.JwtTokenAuth.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            
+            </summary>
+            <param name="httpContext"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Roy.Core.Controllers.AccountController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Roy.Core.Controllers.AccountController.#ctor(Roy.Core.IServices.ISysUserInfoService,Roy.Core.AuthHelper.IJwtFactory,Microsoft.Extensions.Options.IOptions{Roy.Core.AuthHelper.JWT.SecurityDemo.Authentication.JWT.AuthHelper.JwtIssuerOptions},Microsoft.Extensions.Caching.Memory.IMemoryCache)">
+            <summary>
+            
+            </summary>
+            <param name="iocServices"></param>
+            <param name="jwtFactory"></param>
+            <param name="jwtIssuerOptions"></param>
+            <param name="cache"></param>
+        </member>
+        <member name="M:Roy.Core.Controllers.AccountController.LoginAsync(Roy.Core.Model.ViewModel.LoginViewModel)">
+            <summary>
+            
+            </summary>
+            <param name="vModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Roy.Core.Controllers.AccountController.RefreshToken(Roy.Core.AuthHelper.JWT.RefreshTokenOptions)">
+            <summary>
+            RefreshToken
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Roy.Core.Controllers.BaseController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Roy.Core.Controllers.IdentityController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Roy.Core.Controllers.IdentityController.Get">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Roy.Core.Controllers.ModuleController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Roy.Core.Controllers.ModuleController.#ctor(Roy.Core.IServices.IModuleService)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="fService"></param>
+        </member>
+        <member name="M:Roy.Core.Controllers.ModuleController.GetSingleModule(System.String)">
+            <summary>
+            获取菜单列表
+            </summary>
+            <param name="moduleId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Roy.Core.Middware.Filter.ValidataModelFilter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Roy.Core.Middware.Filter.ValidataModelFilter.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:Roy.Core.Middware.Filter.ValidataModelFilter.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <summary>
+            
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="T:Roy.Core.Middware.Filter.XcHttpResult">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Roy.Core.Middware.Filter.XcHttpResult.Msg">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Roy.Core.Middware.Filter.XcHttpResult.Result">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Roy.Core.Program">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Roy.Core.Program.Main(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:Roy.Core.Program.BuildWebHost(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Roy.Core.Startup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Roy.Core.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="P:Roy.Core.Startup.Configuration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Roy.Core.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:Roy.Core.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+            <summary>
+            
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+        </member>
+        <member name="T:Roy.Core.SwaggerHelper.CustomApiVersion">
+            <summary>
+            自定义版本
+            </summary>
+        </member>
+        <member name="T:Roy.Core.SwaggerHelper.CustomApiVersion.ApiVersions">
+            <summary>
+            Api接口版本 自定义
+            </summary>
+        </member>
+        <member name="F:Roy.Core.SwaggerHelper.CustomApiVersion.ApiVersions.v1">
+            <summary>
+            v1 版本
+            </summary>
+        </member>
+        <member name="F:Roy.Core.SwaggerHelper.CustomApiVersion.ApiVersions.v2">
+            <summary>
+            v2 版本
+            </summary>
+        </member>
+        <member name="T:Roy.Core.SwaggerHelper.CustomRouteAttribute">
+            <summary>
+            自定义路由 /api/{version}/[controler]/[action]
+            </summary>
+        </member>
+        <member name="P:Roy.Core.SwaggerHelper.CustomRouteAttribute.GroupName">
+            <summary>
+            分组名称,是来实现接口 IApiDescriptionGroupNameProvider
+            </summary>
+        </member>
+        <member name="M:Roy.Core.SwaggerHelper.CustomRouteAttribute.#ctor(System.String)">
+            <summary>
+            自定义路由构造函数，继承基类路由
+            </summary>
+            <param name="actionName"></param>
+        </member>
+        <member name="M:Roy.Core.SwaggerHelper.CustomRouteAttribute.#ctor(Roy.Core.SwaggerHelper.CustomApiVersion.ApiVersions,System.String)">
+            <summary>
+            自定义版本+路由构造函数，继承基类路由
+            </summary>
+            <param name="actionName"></param>
+            <param name="version"></param>
+        </member>
+    </members>
+</doc>

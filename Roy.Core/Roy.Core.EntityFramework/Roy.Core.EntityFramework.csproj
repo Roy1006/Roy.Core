@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Roy.Core.Entity\**" />
+    <EmbeddedResource Remove="Roy.Core.Entity\**" />
+    <None Remove="Roy.Core.Entity\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="DbHelper.ttinclude" />
+    <None Remove="ModelAuto.ttinclude" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MySql.Data" Version="8.0.13" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Roy.Core.EntityFramework.Entity\" />
+  </ItemGroup>
+
+</Project>
