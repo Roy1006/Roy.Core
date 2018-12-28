@@ -31,6 +31,7 @@ namespace Roy.Core
     /// </summary>
     public class Startup
     {
+        //JWT密钥
         private const string SecretKey = "iNivDmHLpUA223sqsfhqGbMRdRj1PVkH"; // todo: get this from somewhere secure
         private readonly SymmetricSecurityKey _signingKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(SecretKey));
         /// <summary>
@@ -119,12 +120,7 @@ namespace Roy.Core
             });
             #endregion
 
-            #region Token服务注册
-            //services.AddSingleton<IMemoryCache>(factory =>
-            //{
-            //    var cache = new MemoryCache(new MemoryCacheOptions());
-            //    return cache;
-            //});
+            #region Token服务注册            
 
             #region 认证
             var jwtAppSettingOptions = Configuration.GetSection(nameof(JwtIssuerOptions));
@@ -225,7 +221,7 @@ namespace Roy.Core
                 #endregion
             }
 
-            //app.UseMiddleware<JwtTokenAuth>();
+            //app.UseMiddleware<JwtTokenAuth>();中间件形式认证
             app.UseAuthentication();
 
             //添加中间间到应用程序中，允许跨域请求

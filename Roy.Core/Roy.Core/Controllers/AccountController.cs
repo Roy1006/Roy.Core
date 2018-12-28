@@ -24,7 +24,7 @@ namespace Roy.Core.Controllers
     //[EnableCors("AllowSameDomain")]
     public class AccountController : Controller
     {
-        ISysUserInfoService service;
+        ISysUserInfoService _userService;
         private readonly IJwtFactory _jwtFactory;
         private readonly JwtIssuerOptions _jwtIssuerOptions;
         private readonly IMemoryCache _cache;
@@ -32,47 +32,40 @@ namespace Roy.Core.Controllers
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="iocServices"></param>
+        /// <param name="userServices"></param>
         /// <param name="jwtFactory"></param>
         /// <param name="jwtIssuerOptions"></param>
         /// <param name="cache"></param>
-        public AccountController(ISysUserInfoService iocServices,IJwtFactory jwtFactory,IOptions<JwtIssuerOptions> jwtIssuerOptions,IMemoryCache cache)
+        public AccountController(ISysUserInfoService userServices,IJwtFactory jwtFactory,IOptions<JwtIssuerOptions> jwtIssuerOptions,IMemoryCache cache)
         {
-            this.service = iocServices;
+            this._userService = userServices;
             _jwtFactory = jwtFactory;
             _jwtIssuerOptions = jwtIssuerOptions.Value;
             _cache = cache;
         }
-      
+
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="vModel"></param>
+        /// <param name="vm"></param>
         /// <returns></returns>
         [HttpGet]
         [Route("Account")]
-        public async Task<IActionResult> LoginAsync(LoginViewModel vModel)
+        public async Task<IActionResult> Login(LoginViewModel vm)
         {
-            bool isLogin = service.Login(vModel);
+            var userInfo = _userService.Query(e => e.UserId == vm.LoginUserId&&e.Password== vm.LoginPwd).Result.FirstOrDefault();
 
-            JWTTokenModel jm = new JWTTokenModel
+            if (userInfo == null)
             {
-                UserId = vModel.LoginUserId,
-                UserName = vModel.LoginUserId,
-                Role = "01"
-            };
-
-            //if (!isLogin)
-            //{
-            //    return Json(false);
-            //}
-            //return BadRequest(ModelState);
+                ModelState.AddModelError("login_failure", "Invalid username or Invalid password !");
+                return BadRequest(ModelState);
+            }
 
             string refreshToken = Guid.NewGuid().ToString();
-            var claimsIdentity = _jwtFactory.GenerateClaimsIdentity(jm);
+            var claimsIdentity = _jwtFactory.GenerateClaimsIdentity(userInfo);
 
-            _cache.Set(refreshToken, vModel.LoginUserId,TimeSpan.FromMinutes(11));
-            var token = await _jwtFactory.GenerateEncodeTokenAsync(jm.UserName, refreshToken, claimsIdentity);
+            _cache.Set(refreshToken, vm.LoginUserId,TimeSpan.FromMinutes(11));
+            var token = await _jwtFactory.GenerateEncodeToken(userInfo.UserId, refreshToken, claimsIdentity);
 
             return new OkObjectResult(token);
         }
@@ -85,26 +78,26 @@ namespace Roy.Core.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> RefreshToken(RefreshTokenOptions request)
         {
-            string userName;
-            if (!_cache.TryGetValue(request.RefreshToken, out userName))
+            string userId ;
+            if (!_cache.TryGetValue(request.RefreshToken, out userId))
             {
                 ModelState.AddModelError("refreshtoken_failure", "Invalid refreshtoken.");
                 return BadRequest(ModelState);
             }
-            if (!request.UserName.Equals(userName))
+            if (!request.UserId.Equals(userId))
             {
                 ModelState.AddModelError("refreshtoken_failure", "Invalid userName.");
                 return BadRequest(ModelState);
             }
 
-            JWTTokenModel user = new JWTTokenModel();
+            var userInfo = _userService.Query(e => e.UserId == userId).Result.FirstOrDefault();
             string newRefreshToken = Guid.NewGuid().ToString();
-            var claimsIdentity = _jwtFactory.GenerateClaimsIdentity(user);
+            var claimsIdentity = _jwtFactory.GenerateClaimsIdentity(userInfo);
 
             _cache.Remove(request.RefreshToken);
-            _cache.Set(newRefreshToken, user.UserName, TimeSpan.FromMinutes(11));
+            _cache.Set(newRefreshToken, userInfo.UserId, TimeSpan.FromMinutes(11));
 
-            var token = await _jwtFactory.GenerateEncodeTokenAsync(user.UserName, newRefreshToken, claimsIdentity);
+            var token = await _jwtFactory.GenerateEncodeToken(userInfo.UserId, newRefreshToken, claimsIdentity);
             return new OkObjectResult(token);
         }
     }

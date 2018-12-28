@@ -10,6 +10,6 @@ namespace Roy.Core.IRepository
 {
     public interface ISysUserInfoReposity : IBaseRepository<User>
     {
-        
+
     }
 }

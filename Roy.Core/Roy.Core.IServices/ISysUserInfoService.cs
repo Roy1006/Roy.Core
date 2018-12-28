@@ -4,11 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Roy.Core.IServices
 {
     public interface ISysUserInfoService : IBaseServices<User>
     {
-        bool Login(LoginViewModel vModel);
+        Task<List<UserInfoViewModel>> GetUserInfo(LoginViewModel vm);
     }
 }

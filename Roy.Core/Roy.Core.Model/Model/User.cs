@@ -37,5 +37,15 @@ namespace Roy.Core.Model
         /// </summary>
         public string Flag { get; set; }   
 
+        /// <summary>
+        /// email
+        /// </summary>
+        public string Email { get; set; }
+
+        /// <summary>
+        /// 手机
+        /// </summary>
+        public string Phone { get; set; }
+
     }
 }

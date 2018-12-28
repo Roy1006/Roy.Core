@@ -13,18 +13,18 @@ namespace Roy.Core.Services
 {
     public class SysUserInfoServices : BaseServices<User>, ISysUserInfoService
     {
-        ISysUserInfoReposity dal;
+        ISysUserInfoReposity userDal;
+        IUserRoleServices dal;
+        
         public SysUserInfoServices(ISysUserInfoReposity dal)
         {
-            this.dal = dal;
-            base.baseDal = dal;
+            //this.dal = dal;
+            //base.baseDal = dal;
         }
 
-        public bool Login(LoginViewModel vModel)
+        public Task<List<UserInfoViewModel>> GetUserInfo(LoginViewModel vm)
         {
-            var user = Query(m => m.UserId == vModel.LoginUserId && m.Password == vModel.LoginPwd);
-
-            return user.Result.Count == 0 ? false : true;
+            throw new NotImplementedException();
         }
     }
 }

@@ -41,12 +41,14 @@ namespace Roy.Core.AuthHelper.JWT
                 //    return Task.CompletedTask;
                 //}
 
-                var functions = _moduleService.Query();
-                var requestUrl = httpContext.Request.Path.Value.ToLower();
-                if (functions != null && functions.Result.Count > 0 && functions.Result.Where(e => e.TargetUrl == requestUrl).ToList().Count > 0)
-                {
-                    context.Succeed(requirement);
-                }
+                context.Succeed(requirement);
+
+                //var functions = _moduleService.Query();
+                //var requestUrl = httpContext.Request.Path.Value.ToLower();
+                //if (functions != null && functions.Result.Count > 0 && functions.Result.Where(e => e.TargetUrl == requestUrl).ToList().Count > 0)
+                //{
+                //    context.Succeed(requirement);
+                //}
             }
 
             return Task.CompletedTask;

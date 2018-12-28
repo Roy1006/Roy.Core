@@ -15,7 +15,7 @@ namespace Roy.Core.AuthHelper.JWT
         /// 
         /// </summary>
         [Required(ErrorMessage = "{0} is required.")]
-        public string UserName { get; set; }
+        public string UserId { get; set; }
 
         /// <summary>
         /// 
