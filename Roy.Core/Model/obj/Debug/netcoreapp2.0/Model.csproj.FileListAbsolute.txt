@@ -1,9 +1,0 @@
-H:\Roy.Core\Roy.Core\Model\bin\Debug\netcoreapp2.0\Model.deps.json
-H:\Roy.Core\Roy.Core\Model\bin\Debug\netcoreapp2.0\Model.dll
-H:\Roy.Core\Roy.Core\Model\bin\Debug\netcoreapp2.0\Model.pdb
-H:\Roy.Core\Roy.Core\Model\obj\Debug\netcoreapp2.0\Model.csprojResolveAssemblyReference.cache
-H:\Roy.Core\Roy.Core\Model\obj\Debug\netcoreapp2.0\Model.csproj.CoreCompileInputs.cache
-H:\Roy.Core\Roy.Core\Model\obj\Debug\netcoreapp2.0\Model.AssemblyInfoInputs.cache
-H:\Roy.Core\Roy.Core\Model\obj\Debug\netcoreapp2.0\Model.AssemblyInfo.cs
-H:\Roy.Core\Roy.Core\Model\obj\Debug\netcoreapp2.0\Model.dll
-H:\Roy.Core\Roy.Core\Model\obj\Debug\netcoreapp2.0\Model.pdb
