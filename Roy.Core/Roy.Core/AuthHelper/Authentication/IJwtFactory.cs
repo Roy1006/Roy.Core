@@ -1,5 +1,4 @@
-﻿using Roy.Core.AuthHelper.OverWrite;
-using Roy.Core.Model;
+﻿using Roy.Core.Model.ViewModel;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -23,6 +22,6 @@ namespace Roy.Core.AuthHelper
         /// 
         /// </summary>
         /// <returns></returns>
-        ClaimsIdentity GenerateClaimsIdentity(User user);
+        ClaimsIdentity GenerateClaimsIdentity(UserInfoViewModel user);
     }
 }

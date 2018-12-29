@@ -44,11 +44,6 @@ namespace Roy.Core.Model.ViewModel
         /// <summary>
         /// 
         /// </summary>
-        public string DeptName { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public List<Module> Modules { get; set; }
+        public string DeptName { get; set; }       
     }
 }

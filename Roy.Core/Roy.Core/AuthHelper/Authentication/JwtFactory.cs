@@ -11,6 +11,7 @@ using Roy.Core.AuthHelper.JWT;
 using Roy.Core.AuthHelper.JWT.SecurityDemo.Authentication.JWT.AuthHelper;
 using Roy.Core.AuthHelper.OverWrite;
 using Roy.Core.Model;
+using Roy.Core.Model.ViewModel;
 
 namespace Roy.Core.AuthHelper
 {
@@ -35,13 +36,13 @@ namespace Roy.Core.AuthHelper
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public ClaimsIdentity GenerateClaimsIdentity(User user)
+        public ClaimsIdentity GenerateClaimsIdentity(UserInfoViewModel user)
         {
             var claimIdentity = new ClaimsIdentity(new GenericIdentity(user.UserName, "Token"));
             //claimIdentity.AddClaim(new Claim("id", user.UserId));
             claimIdentity.AddClaim(new Claim(ClaimTypes.Name, user.UserName));
             //如果多角色，foreach循环添加
-            //claimIdentity.AddClaim(new Claim(ClaimTypes.Role, user.Role));
+            claimIdentity.AddClaim(new Claim(ClaimTypes.Role, user.RoleId));
 
             return claimIdentity;
         }

@@ -10,6 +10,6 @@ namespace Roy.Core.IServices
 {
     public interface ISysUserInfoService : IBaseServices<User>
     {
-        Task<List<UserInfoViewModel>> GetUserInfo(LoginViewModel vm);
+        Task<UserInfoViewModel> GetUserInfo(LoginViewModel loginModel);
     }
 }

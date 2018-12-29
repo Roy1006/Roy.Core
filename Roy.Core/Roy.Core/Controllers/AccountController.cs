@@ -53,7 +53,7 @@ namespace Roy.Core.Controllers
         [Route("Account")]
         public async Task<IActionResult> Login(LoginViewModel vm)
         {
-            var userInfo = _userService.Query(e => e.UserId == vm.LoginUserId&&e.Password== vm.LoginPwd).Result.FirstOrDefault();
+            var userInfo = await _userService.GetUserInfo(vm);
 
             if (userInfo == null)
             {
@@ -64,10 +64,10 @@ namespace Roy.Core.Controllers
             string refreshToken = Guid.NewGuid().ToString();
             var claimsIdentity = _jwtFactory.GenerateClaimsIdentity(userInfo);
 
-            _cache.Set(refreshToken, vm.LoginUserId,TimeSpan.FromMinutes(11));
+            _cache.Set(refreshToken, vm.LoginUserId, TimeSpan.FromMinutes(11));
             var token = await _jwtFactory.GenerateEncodeToken(userInfo.UserId, refreshToken, claimsIdentity);
 
-            return new OkObjectResult(token);
+            return new OkObjectResult(userInfo);
         }
 
         /// <summary>
@@ -89,8 +89,8 @@ namespace Roy.Core.Controllers
                 ModelState.AddModelError("refreshtoken_failure", "Invalid userName.");
                 return BadRequest(ModelState);
             }
-
-            var userInfo = _userService.Query(e => e.UserId == userId).Result.FirstOrDefault();
+            LoginViewModel vm = new LoginViewModel { LoginUserId = userId };
+            var userInfo =await _userService.GetUserInfo(vm);
             string newRefreshToken = Guid.NewGuid().ToString();
             var claimsIdentity = _jwtFactory.GenerateClaimsIdentity(userInfo);
 
@@ -100,5 +100,6 @@ namespace Roy.Core.Controllers
             var token = await _jwtFactory.GenerateEncodeToken(userInfo.UserId, newRefreshToken, claimsIdentity);
             return new OkObjectResult(token);
         }
+
     }
 }
