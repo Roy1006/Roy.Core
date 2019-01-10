@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
-using Roy.Core.AuthHelper;
-using Roy.Core.AuthHelper.JWT;
-using Roy.Core.AuthHelper.JWT.SecurityDemo.Authentication.JWT.AuthHelper;
-using Roy.Core.AuthHelper.OverWrite;
+using Roy.Core.Authentication;
 using Roy.Core.IServices;
 using Roy.Core.Model.ViewModel;
 
@@ -67,7 +60,7 @@ namespace Roy.Core.Controllers
             _cache.Set(refreshToken, vm.LoginUserId, TimeSpan.FromMinutes(11));
             var token = await _jwtFactory.GenerateEncodeToken(userInfo.UserId, refreshToken, claimsIdentity);
 
-            return new OkObjectResult(userInfo);
+            return new OkObjectResult(token);
         }
 
         /// <summary>
@@ -78,8 +71,7 @@ namespace Roy.Core.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> RefreshToken(RefreshTokenOptions request)
         {
-            string userId ;
-            if (!_cache.TryGetValue(request.RefreshToken, out userId))
+            if (!_cache.TryGetValue(request.RefreshToken, out string userId))
             {
                 ModelState.AddModelError("refreshtoken_failure", "Invalid refreshtoken.");
                 return BadRequest(ModelState);

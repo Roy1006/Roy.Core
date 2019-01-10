@@ -4,16 +4,12 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.IdentityModel.Tokens;
-using Roy.Core.AuthHelper;
-using Roy.Core.AuthHelper.JWT;
-using Roy.Core.AuthHelper.JWT.SecurityDemo.Authentication.JWT.AuthHelper;
-using Roy.Core.AuthHelper.OverWrite;
-using Roy.Core.IServices;
+using Roy.Core.Authentication;
+using Roy.Core.Authorization;
 using Roy.Core.Middware.Filter;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
@@ -21,7 +17,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using static Roy.Core.SwaggerHelper.CustomApiVersion;
 
 namespace Roy.Core
@@ -163,7 +158,9 @@ namespace Roy.Core
             #region 授权
              services.AddAuthorization(options =>
              {
-                 //options.AddPolicy("Client", policy => policy.RequireRole("Client").Build());
+                 string[] roles = {"01","05","06" };
+                 options.AddPolicy("Client", policy => policy.RequireRole(roles).Build());
+
                  //options.AddPolicy("Admin", policy => policy.RequireRole("Admin").Build());
                  //options.AddPolicy("SystemOrAdmin", policy => policy.RequireRole("Admin", "System"));
 

@@ -15,17 +15,17 @@ namespace Roy.Core.Repository
     {
         public async Task<UserInfoViewModel> GetUserInfo(LoginViewModel loginModel)
         {
-            UserInfoViewModel userInfo = new UserInfoViewModel();
+            UserInfoViewModel userInfo = null;
             try
             {
                 userInfo = this.Db.Queryable<User, UserRole, Role, Department>((u, ur, r, d) => new object[]
                   {
-                     JoinType.Inner,u.UserId==ur.UserId,
-                     JoinType.Inner,ur.RoleId==r.RoleId,
-                     JoinType.Left,u.DeptId==d.DeptId
+                     JoinType.Inner,u.UserId == ur.UserId,
+                     JoinType.Inner,ur.RoleId == r.RoleId,
+                     JoinType.Left,u.DeptId == d.DeptId
                   })
-                  .WhereIF(!string.IsNullOrWhiteSpace(loginModel.LoginUserId),e=>e.UserId==loginModel.LoginUserId)
-                  .WhereIF(!string.IsNullOrWhiteSpace(loginModel.LoginPwd), e => e.UserId == loginModel.LoginPwd)
+                  .WhereIF(!string.IsNullOrWhiteSpace(loginModel.LoginUserId), (u => u.UserId == loginModel.LoginUserId))
+                  .WhereIF(!string.IsNullOrWhiteSpace(loginModel.LoginPwd), (u => u.Password == loginModel.LoginPwd))
                   .Select((u, ur, r, d) => new UserInfoViewModel
                   {
                       UserId = u.UserId,

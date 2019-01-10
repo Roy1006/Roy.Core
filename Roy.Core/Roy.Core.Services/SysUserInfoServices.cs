@@ -14,18 +14,10 @@ namespace Roy.Core.Services
     public class SysUserInfoServices : BaseServices<User>, ISysUserInfoService
     {
         ISysUserInfoReposity userDal;
-        IUserRoleReposity userRoleDal;
-        IRoleReposity roleDal;
-        IPermissionReposity pDal;
-        IDepartmentReposity deDal;
         
-        public SysUserInfoServices(ISysUserInfoReposity userDal, IUserRoleReposity userRoleDal, IRoleReposity roleDal,IPermissionReposity pDal, IDepartmentReposity deDal)
+        public SysUserInfoServices(ISysUserInfoReposity userDal)
         {
             this.userDal = userDal;
-            this.userRoleDal = userRoleDal;
-            this.roleDal = roleDal;
-            this.pDal = pDal;
-            this.deDal = deDal;
             this.baseDal = userDal;
         }
 
@@ -34,9 +26,9 @@ namespace Roy.Core.Services
         /// </summary>
         /// <param name="vm"></param>
         /// <returns></returns>
-        public async Task<UserInfoViewModel> GetUserInfo(string UserId)
+        public async Task<UserInfoViewModel> GetUserInfo(LoginViewModel vm)
         {
-            var result = await userDal.GetUserInfo(UserId);
+            var result = await userDal.GetUserInfo(vm);
 
             return result;
         }

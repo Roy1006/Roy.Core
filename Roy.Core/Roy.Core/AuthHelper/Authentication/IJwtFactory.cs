@@ -2,7 +2,7 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace Roy.Core.AuthHelper
+namespace Roy.Core.Authentication
 {
     /// <summary>
     /// 

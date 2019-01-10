@@ -12,11 +12,11 @@ namespace Roy.Core.Controllers
     /// </summary>
     [Produces("application/json")]
     [Route("api/Module")]
-    [Authorize(Policy = "Permssion")]
-    //[EnableCors("AllowDomain")]
+    [Authorize(Policy = "Client")]    
     public class ModuleController : Controller
     {
         IModuleService service;
+        
         /// <summary>
         /// 构造函数
         /// </summary>
@@ -29,13 +29,13 @@ namespace Roy.Core.Controllers
         /// <summary>
         /// 获取菜单列表
         /// </summary>
-        /// <param name="moduleId"></param>
         /// <returns></returns>
-        [HttpGet]
-        [Route("GetSingleModule")]
-        public async Task<List<Module>> GetSingleModule(string moduleId)
-        {
-            return await service.Query();
+        [HttpPost]
+        [Route("GetTopten")]
+        public async Task<List<Module>> GetModules()
+        {           
+            string userId = HttpContext.User.Identity.Name;
+            return await service.GetUserModules(userId);
         }
     }
 }

@@ -10,6 +10,6 @@ namespace Roy.Core.IRepository
 {
     public partial interface IModuleReposity : IBaseRepository<Module>
     {
-
+        Task<List<Module>> GetUserModules(string userId);
     }
 }

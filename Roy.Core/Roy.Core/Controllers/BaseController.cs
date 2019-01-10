@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Roy.Core.Controllers
@@ -10,9 +6,24 @@ namespace Roy.Core.Controllers
     /// <summary>
     /// 
     /// </summary>
-    //[Authorize]
+    [Authorize(Policy = "Permssion")]
     public class BaseController : Controller
     {
-      
+        /// <summary>
+        /// 
+        /// </summary>
+        public BaseController()
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        protected string GetCurrentUser()
+        {
+            return HttpContext.User.Identity.Name;
+        }
     }
 }

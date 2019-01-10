@@ -6,17 +6,24 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 using Roy.Core.Services.Base;
-
+using System.Threading.Tasks;
 
 namespace Roy.Core.Services
 {
     public class ModuleServices : BaseServices<Module>, IModuleService
     {
-        IModuleReposity dal;
+        IModuleReposity moduleDal;
         public ModuleServices(IModuleReposity dal)        
         {
-            this.dal = dal;
+            this.moduleDal = dal;
             base.baseDal = dal;
+        }
+
+        public async Task<List<Module>> GetUserModules(string userId)
+        {
+            var result = await moduleDal.GetUserModules(userId);
+
+            return result;
         }
     }
 }

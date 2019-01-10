@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Roy.Core.AuthHelper.JWT
+namespace Roy.Core.Authorization
 {
     /// <summary>
     /// 

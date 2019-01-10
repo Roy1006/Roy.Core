@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Roy.Core.IServices;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace Roy.Core.AuthHelper.JWT
+namespace Roy.Core.Authorization
 {
     /// <summary>
     /// 
@@ -19,7 +19,6 @@ namespace Roy.Core.AuthHelper.JWT
         /// </summary>
         public PermissionHander(IModuleService moduleService)
         {
-            //_userServices = userServices;
             _moduleService = moduleService;
         }
 
@@ -41,14 +40,14 @@ namespace Roy.Core.AuthHelper.JWT
                 //    return Task.CompletedTask;
                 //}
 
-                context.Succeed(requirement);
+                var modules = _moduleService.GetUserModules(httpContext.User.Identity.Name);
+                var requestUrl = httpContext.Request.Path.Value.ToLower();
+                requestUrl = requestUrl.Substring(requestUrl.IndexOf('/',1), requestUrl.Length - requestUrl.IndexOf('/',1));
 
-                //var functions = _moduleService.Query();
-                //var requestUrl = httpContext.Request.Path.Value.ToLower();
-                //if (functions != null && functions.Result.Count > 0 && functions.Result.Where(e => e.TargetUrl == requestUrl).ToList().Count > 0)
-                //{
-                //    context.Succeed(requirement);
-                //}
+                if (modules != null && modules.Result.Count > 0 && modules.Result.Where(e => e.TargetUrl.ToLower() == requestUrl).ToList().Count > 0)
+                {
+                    context.Succeed(requirement);
+                }
             }
 
             return Task.CompletedTask;

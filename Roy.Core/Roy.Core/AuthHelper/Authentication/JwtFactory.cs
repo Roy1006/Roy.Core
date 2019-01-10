@@ -7,13 +7,10 @@ using System.Security.Principal;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using Roy.Core.AuthHelper.JWT;
-using Roy.Core.AuthHelper.JWT.SecurityDemo.Authentication.JWT.AuthHelper;
-using Roy.Core.AuthHelper.OverWrite;
 using Roy.Core.Model;
 using Roy.Core.Model.ViewModel;
 
-namespace Roy.Core.AuthHelper
+namespace Roy.Core.Authentication
 {
     /// <summary>
     /// 
@@ -38,9 +35,9 @@ namespace Roy.Core.AuthHelper
         /// <returns></returns>
         public ClaimsIdentity GenerateClaimsIdentity(UserInfoViewModel user)
         {
-            var claimIdentity = new ClaimsIdentity(new GenericIdentity(user.UserName, "Token"));
+            var claimIdentity = new ClaimsIdentity(new GenericIdentity(user.UserId, "Token"));
             //claimIdentity.AddClaim(new Claim("id", user.UserId));
-            claimIdentity.AddClaim(new Claim(ClaimTypes.Name, user.UserName));
+            claimIdentity.AddClaim(new Claim(ClaimTypes.Name, user.UserId));
             //如果多角色，foreach循环添加
             claimIdentity.AddClaim(new Claim(ClaimTypes.Role, user.RoleId));
 
