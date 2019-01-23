@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Roy.Common\Roy.Common.csproj" />
     <ProjectReference Include="..\Roy.Core.IRepository\Roy.Core.IRepository.csproj" />
     <ProjectReference Include="..\Roy.Core.IServices\Roy.Core.IServices.csproj" />
   </ItemGroup>

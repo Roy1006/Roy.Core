@@ -80,7 +80,7 @@ namespace Roy.Core.Authentication
                 expires_in = (int)_jwtOptions.ValidFor.TotalSeconds,
                 token_type = "Bearer"
             };
-            return JsonConvert.SerializeObject(response, new JsonSerializerSettings { Formatting = Formatting.Indented });
+            return JsonConvert.SerializeObject(response);
         }
 
         private static long ToUnixEpochDate(DateTime date)

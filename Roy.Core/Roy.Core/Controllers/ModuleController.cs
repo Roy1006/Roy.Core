@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Roy.Core.IServices;
 using Roy.Core.Model;
+using Roy.Core.Model.ViewModel;
 
 namespace Roy.Core.Controllers
 {
@@ -31,8 +32,8 @@ namespace Roy.Core.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [Route("GetTopten")]
-        public async Task<List<Module>> GetModules()
+        [Route("GetModules")]
+        public async Task<List<ModuleViewModel>> GetModules()
         {           
             string userId = HttpContext.User.Identity.Name;
             return await service.GetUserModules(userId);

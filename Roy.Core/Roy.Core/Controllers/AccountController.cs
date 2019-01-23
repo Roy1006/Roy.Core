@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 using Roy.Core.Authentication;
 using Roy.Core.IServices;
 using Roy.Core.Model.ViewModel;
+using Roy.Common;
 
 namespace Roy.Core.Controllers
 {
@@ -46,21 +47,31 @@ namespace Roy.Core.Controllers
         [Route("Account")]
         public async Task<IActionResult> Login(LoginViewModel vm)
         {
+            ReturnObject<string> result = new ReturnObject<string>();
+            ServerStatus status = new ServerStatus();
+
             var userInfo = await _userService.GetUserInfo(vm);
 
             if (userInfo == null)
             {
-                ModelState.AddModelError("login_failure", "Invalid username or Invalid password !");
-                return BadRequest(ModelState);
+                //ModelState.AddModelError("login_failure", "Invalid username or Invalid password !");
+                //return BadRequest(ModelState);
+                result.Data = "Invalid username or Invalid password !";
+                result.Status = ServerStatus.LoginFail;
+
+               return new OkObjectResult(result);
             }
 
             string refreshToken = Guid.NewGuid().ToString();
             var claimsIdentity = _jwtFactory.GenerateClaimsIdentity(userInfo);
 
             _cache.Set(refreshToken, vm.LoginUserId, TimeSpan.FromMinutes(11));
-            var token = await _jwtFactory.GenerateEncodeToken(userInfo.UserId, refreshToken, claimsIdentity);
+            var jwtToken = await _jwtFactory.GenerateEncodeToken(userInfo.UserId, refreshToken, claimsIdentity);
 
-            return new OkObjectResult(token);
+            result.Data = jwtToken;
+            result.Status = ServerStatus.Success;
+
+            return new OkObjectResult(result);
         }
 
         /// <summary>
